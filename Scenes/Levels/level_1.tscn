@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://d21vl1nnhhc1f"]
+
+[ext_resource type="Script" path="res://Scripts/Levels/level_1.gd" id="1_wpw4o"]
+[ext_resource type="PackedScene" uid="uid://cu3qe1lrfwqn3" path="res://Scenes/player_body.tscn" id="2_yx4ri"]
+
+[node name="Level_1" type="Node2D"]
+script = ExtResource("1_wpw4o")
+
+[node name="ConnectingLine" type="Line2D" parent="."]
+width = 2.0
+
+[node name="PlayerBody" parent="." instance=ExtResource("2_yx4ri")]
+position = Vector2(147, 115)
