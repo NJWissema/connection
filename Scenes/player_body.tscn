@@ -7,7 +7,6 @@
 radius = 15.0
 
 [node name="PlayerBody" type="CharacterBody2D"]
-position = Vector2(77, 129)
 input_pickable = true
 script = ExtResource("1_t2smt")
 

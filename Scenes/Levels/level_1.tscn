@@ -8,6 +8,8 @@
 script = ExtResource("1_wpw4o")
 
 [node name="BodyConnection" parent="." node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_wsim3")]
+max_length = 100.0
+desired_length = 20.0
 body1 = NodePath("../PlayerBody")
 body2 = NodePath("../PlayerBody2")
 
@@ -20,10 +22,10 @@ body1 = NodePath("../PlayerBody2")
 body2 = NodePath("../PlayerBody3")
 
 [node name="PlayerBody" parent="." instance=ExtResource("2_yx4ri")]
-position = Vector2(147, 115)
+position = Vector2(222, 104)
 
 [node name="PlayerBody2" parent="." instance=ExtResource("2_yx4ri")]
-position = Vector2(266, 81)
+position = Vector2(265, 86)
 
 [node name="PlayerBody3" parent="." instance=ExtResource("2_yx4ri")]
-position = Vector2(322, 217)
+position = Vector2(274, 140)
