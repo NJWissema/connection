@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0qktevoeanrw"]
+
+[ext_resource type="Script" path="res://Scripts/body_connection.gd" id="1_et56d"]
+
+[node name="BodyConnection" type="Line2D"]
+closed = true
+width = 2.0
+default_color = Color(1, 0, 0, 1)
+script = ExtResource("1_et56d")

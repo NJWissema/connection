@@ -14,7 +14,7 @@ script = ExtResource("1_t2smt")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_6u2sr")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="BodySprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_asb32")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

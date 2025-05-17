@@ -1,13 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://d21vl1nnhhc1f"]
+[gd_scene load_steps=4 format=3 uid="uid://d21vl1nnhhc1f"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/level_1.gd" id="1_wpw4o"]
+[ext_resource type="PackedScene" uid="uid://d0qktevoeanrw" path="res://Scenes/body_connection.tscn" id="2_wsim3"]
 [ext_resource type="PackedScene" uid="uid://cu3qe1lrfwqn3" path="res://Scenes/player_body.tscn" id="2_yx4ri"]
 
 [node name="Level_1" type="Node2D"]
 script = ExtResource("1_wpw4o")
 
-[node name="ConnectingLine" type="Line2D" parent="."]
-width = 2.0
+[node name="BodyConnection" parent="." node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_wsim3")]
+body1 = NodePath("../PlayerBody")
+body2 = NodePath("../PlayerBody2")
+
+[node name="BodyConnection2" parent="." node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_wsim3")]
+body1 = NodePath("../PlayerBody")
+body2 = NodePath("../PlayerBody3")
+
+[node name="BodyConnection3" parent="." node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_wsim3")]
+body1 = NodePath("../PlayerBody2")
+body2 = NodePath("../PlayerBody3")
 
 [node name="PlayerBody" parent="." instance=ExtResource("2_yx4ri")]
 position = Vector2(147, 115)
+
+[node name="PlayerBody2" parent="." instance=ExtResource("2_yx4ri")]
+position = Vector2(266, 81)
+
+[node name="PlayerBody3" parent="." instance=ExtResource("2_yx4ri")]
+position = Vector2(322, 217)
