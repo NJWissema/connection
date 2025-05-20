@@ -8,6 +8,7 @@ radius = 15.0
 
 [node name="PlayerBody" type="CharacterBody2D"]
 input_pickable = true
+motion_mode = 1
 script = ExtResource("1_t2smt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://d21vl1nnhhc1f"]
+
+[ext_resource type="Script" path="res://Scripts/Levels/level.gd" id="1_wpw4o"]
+[ext_resource type="PackedScene" uid="uid://d0qktevoeanrw" path="res://Scenes/body_connection.tscn" id="2_wsim3"]
+[ext_resource type="PackedScene" uid="uid://cu3qe1lrfwqn3" path="res://Scenes/player_body.tscn" id="2_yx4ri"]
+
+[node name="Level" type="Node2D" node_paths=PackedStringArray("bodies", "lines")]
+script = ExtResource("1_wpw4o")
+bodies = [NodePath("PlayLayer/Map/PlayerBody"), NodePath("PlayLayer/Map/PlayerBody2"), NodePath("PlayLayer/Map/PlayerBody3")]
+lines = [NodePath("PlayLayer/Map/BodyConnection"), NodePath("PlayLayer/Map/BodyConnection2"), NodePath("PlayLayer/Map/BodyConnection3")]
+
+[node name="PlayLayer" type="CanvasLayer" parent="."]
+
+[node name="Map" type="Node2D" parent="PlayLayer"]
+
+[node name="Obstacles" type="Node2D" parent="PlayLayer/Map"]
+
+[node name="BodyConnection" parent="PlayLayer/Map" node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_wsim3")]
+max_length = 500.0
+desired_length = 60.0
+body1 = NodePath("../PlayerBody")
+body2 = NodePath("../PlayerBody2")
+
+[node name="BodyConnection2" parent="PlayLayer/Map" node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_wsim3")]
+max_length = 600.0
+desired_length = 60.0
+body1 = NodePath("../PlayerBody")
+body2 = NodePath("../PlayerBody3")
+
+[node name="BodyConnection3" parent="PlayLayer/Map" node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_wsim3")]
+desired_length = 60.0
+body1 = NodePath("../PlayerBody2")
+body2 = NodePath("../PlayerBody3")
+
+[node name="PlayerBody" parent="PlayLayer/Map" instance=ExtResource("2_yx4ri")]
+position = Vector2(222, 104)
+
+[node name="PlayerBody2" parent="PlayLayer/Map" instance=ExtResource("2_yx4ri")]
+position = Vector2(402, 61)
+
+[node name="PlayerBody3" parent="PlayLayer/Map" instance=ExtResource("2_yx4ri")]
+position = Vector2(345, 210)
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="TileMapLayer" type="TileMapLayer" parent="BackgroundLayer"]
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundLayer"]
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="TextEdit" type="TextEdit" parent="UILayer"]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UILayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+text = "TEST
+"
