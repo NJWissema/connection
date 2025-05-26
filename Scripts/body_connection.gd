@@ -1,6 +1,6 @@
 class_name BodyConnection extends Line2D
 
-signal connection_achieved(Line:BodyConnection, CurrentLength: float, DesiredLength:float)
+#signal connection_achieved(Line:BodyConnection, CurrentLength: float, DesiredLength:float)
 
 @export var max_length: float = 200.0
 @export var desired_length: float = 50.0

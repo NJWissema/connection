@@ -1,12 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://u2naw361yemr"]
+[gd_scene load_steps=9 format=3 uid="uid://d0pv24wyq1qn4"]
 
-[ext_resource type="Script" path="res://Scripts/Levels/level.gd" id="1_wpw4o"]
-[ext_resource type="PackedScene" uid="uid://cbeq7eqjqt8d3" path="res://Scenes/Levels/level_2.tscn" id="2_6c4g0"]
-[ext_resource type="PackedScene" uid="uid://d0qktevoeanrw" path="res://Scenes/body_connection.tscn" id="2_wsim3"]
-[ext_resource type="PackedScene" uid="uid://cu3qe1lrfwqn3" path="res://Scenes/player_body.tscn" id="2_yx4ri"]
-[ext_resource type="Texture2D" uid="uid://cshudf0n7c0lm" path="res://assets/background.png" id="4_4nyes"]
-[ext_resource type="Texture2D" uid="uid://3elk24jykwxb" path="res://assets/grip-lines-solid.svg" id="5_l3vrf"]
-[ext_resource type="Theme" uid="uid://clx3txsce2cib" path="res://assets/the_theme.tres" id="6_efsg8"]
+[ext_resource type="Script" path="res://Scripts/Levels/level.gd" id="1_bnk3s"]
+[ext_resource type="PackedScene" uid="uid://d0qktevoeanrw" path="res://Scenes/body_connection.tscn" id="2_64j3g"]
+[ext_resource type="PackedScene" uid="uid://cu3qe1lrfwqn3" path="res://Scenes/player_body.tscn" id="3_dd402"]
+[ext_resource type="Texture2D" uid="uid://cshudf0n7c0lm" path="res://assets/background.png" id="4_tcenf"]
+[ext_resource type="Texture2D" uid="uid://3elk24jykwxb" path="res://assets/grip-lines-solid.svg" id="5_380xh"]
+[ext_resource type="Theme" uid="uid://clx3txsce2cib" path="res://assets/the_theme.tres" id="6_u440j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3epbn"]
 size = Vector2(20, 400)
@@ -15,11 +14,10 @@ size = Vector2(20, 400)
 size = Vector2(640, 20)
 
 [node name="Level" type="Node2D" node_paths=PackedStringArray("bodies", "lines")]
-script = ExtResource("1_wpw4o")
-level_name = "Level 1"
+script = ExtResource("1_bnk3s")
+level_name = "Level 3"
 bodies = [NodePath("PlayLayer/Map/PlayerBody"), NodePath("PlayLayer/Map/PlayerBody2"), NodePath("PlayLayer/Map/PlayerBody3")]
 lines = [NodePath("PlayLayer/Map/BodyConnection"), NodePath("PlayLayer/Map/BodyConnection2"), NodePath("PlayLayer/Map/BodyConnection3")]
-nextLevel = ExtResource("2_6c4g0")
 
 [node name="PlayLayer" type="CanvasLayer" parent="."]
 
@@ -53,30 +51,30 @@ shape = SubResource("RectangleShape2D_vq5rg")
 
 [node name="Map" type="Node2D" parent="PlayLayer"]
 
-[node name="BodyConnection" parent="PlayLayer/Map" node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_wsim3")]
+[node name="BodyConnection" parent="PlayLayer/Map" node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_64j3g")]
 max_length = 500.0
 desired_length = 60.0
 body1 = NodePath("../PlayerBody")
 body2 = NodePath("../PlayerBody2")
 
-[node name="BodyConnection2" parent="PlayLayer/Map" node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_wsim3")]
+[node name="BodyConnection2" parent="PlayLayer/Map" node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_64j3g")]
 max_length = 600.0
 desired_length = 60.0
 body1 = NodePath("../PlayerBody")
 body2 = NodePath("../PlayerBody3")
 
-[node name="BodyConnection3" parent="PlayLayer/Map" node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_wsim3")]
+[node name="BodyConnection3" parent="PlayLayer/Map" node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_64j3g")]
 desired_length = 60.0
 body1 = NodePath("../PlayerBody2")
 body2 = NodePath("../PlayerBody3")
 
-[node name="PlayerBody" parent="PlayLayer/Map" instance=ExtResource("2_yx4ri")]
+[node name="PlayerBody" parent="PlayLayer/Map" instance=ExtResource("3_dd402")]
 position = Vector2(254, 117)
 
-[node name="PlayerBody2" parent="PlayLayer/Map" instance=ExtResource("2_yx4ri")]
+[node name="PlayerBody2" parent="PlayLayer/Map" instance=ExtResource("3_dd402")]
 position = Vector2(352, 116)
 
-[node name="PlayerBody3" parent="PlayLayer/Map" instance=ExtResource("2_yx4ri")]
+[node name="PlayerBody3" parent="PlayLayer/Map" instance=ExtResource("3_dd402")]
 position = Vector2(307, 187)
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
@@ -86,7 +84,7 @@ transform = Transform2D(1, 0, 0, 1, 320, 180)
 follow_viewport_enabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="BackgroundLayer"]
-texture = ExtResource("4_4nyes")
+texture = ExtResource("4_tcenf")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="BackgroundLayer"]
 
@@ -104,7 +102,7 @@ offset_top = -3.0
 offset_right = 1039.0
 offset_bottom = 517.0
 scale = Vector2(0.1, 0.1)
-icon = ExtResource("5_l3vrf")
+icon = ExtResource("5_380xh")
 flat = true
 
 [node name="PauseMenu" type="Control" parent="UILayer"]
@@ -129,7 +127,7 @@ offset_right = 50.0
 offset_bottom = 69.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("6_efsg8")
+theme = ExtResource("6_u440j")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UILayer/PauseMenu/MarginContainer"]
 layout_mode = 2
@@ -174,7 +172,7 @@ offset_right = 50.0
 offset_bottom = 63.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("6_efsg8")
+theme = ExtResource("6_u440j")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UILayer/LossMenu/MarginContainer"]
 layout_mode = 2
@@ -214,7 +212,7 @@ offset_right = 50.0
 offset_bottom = 80.5
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("6_efsg8")
+theme = ExtResource("6_u440j")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UILayer/WinMenu/MarginContainer"]
 layout_mode = 2

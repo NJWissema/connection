@@ -22,7 +22,7 @@ func get_input():
 		input.y -= 1
 	return input
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	
 	var direction = get_input()
 	if direction.length() > 0 and selected:
@@ -46,7 +46,7 @@ func highlight():
 func unhighlight():
 	body_sprite.set_modulate(Color(1,1,1,1))
 
-func _on_input_event(viewport, event, shape_idx):
+func _on_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if selected:
 			un_select()

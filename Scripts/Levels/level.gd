@@ -7,36 +7,63 @@ class_name Level extends Node2D
 @export var bodies : Array[PlayerBody]
 @export var lines : Array[BodyConnection]
 
+@export var nextLevel: PackedScene = null
+
 @onready var play_area := $PlayLayer
+@onready var pause_menu := $UILayer/PauseMenu
+@onready var loss_menu := $UILayer/LossMenu
+@onready var win_menu := $UILayer/WinMenu
 
 var won: bool = false
 var lost: bool = false
+
+var game_paused: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$UILayer/LevelTextLabel.text = level_name
 
 
-
 func display_victory():
 	pause_game()
+	win_menu.visible = true
+	if nextLevel != null:
+		$UILayer/WinMenu/MarginContainer/VBoxContainer/NextLevel.disabled = false
 
 func display_loss():
-	unpause_game()
-
-func pause_menu():
 	pause_game()
+	loss_menu.visible = true
 
 func pause_game():
-	play_area.process_mode = PROCESS_MODE_DISABLED
+	if !game_paused:
+		game_paused = true
+		play_area.process_mode = PROCESS_MODE_DISABLED
 
 func unpause_game():
-	play_area.process_mode = PROCESS_MODE_INHERIT
+	if game_paused:
+		game_paused = false
+		play_area.process_mode = PROCESS_MODE_INHERIT
+
+func restart_game():
+	
+	get_tree().reload_current_scene()
+
+func open_pause_menu():
+	pause_game()
+	pause_menu.visible = true
+
+func close_pause_menu():
+	pause_menu.visible = false
+	unpause_game()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
-func _physics_process(delta):
+func _input(_event):
+	if Input.is_action_pressed('escape'):
+		open_pause_menu()
+
+func _physics_process(_delta):
 	if !won and !lost:
 		var level_won: bool = true
 		var level_lost: bool = false
@@ -52,3 +79,24 @@ func _physics_process(delta):
 			display_loss()
 		
 	
+
+#Pause game
+func _on_pause_pressed():
+	open_pause_menu()
+
+#Resume game
+func _on_resume_pressed():
+	close_pause_menu()
+
+#Restart the instance
+func _on_restart_pressed():
+	restart_game()
+
+#To go back to main menu
+func _on_quit_pressed():
+	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+
+#To go to next level
+func _on_next_level_pressed():
+	if nextLevel != null:
+		get_tree().change_scene_to_packed(nextLevel)
