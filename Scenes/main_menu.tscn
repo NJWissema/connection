@@ -1,14 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://dkatj6ndrvg1i"]
+[gd_scene load_steps=6 format=3 uid="uid://dkatj6ndrvg1i"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_ofq1i"]
 [ext_resource type="Texture2D" uid="uid://cshudf0n7c0lm" path="res://assets/background.png" id="1_u5w6c"]
 [ext_resource type="PackedScene" uid="uid://u2naw361yemr" path="res://Scenes/Levels/level_1.tscn" id="2_offtv"]
+[ext_resource type="PackedScene" uid="uid://d0qktevoeanrw" path="res://Scenes/body_connection.tscn" id="4_ar8iu"]
+[ext_resource type="PackedScene" uid="uid://cu3qe1lrfwqn3" path="res://Scenes/player_body.tscn" id="5_quse2"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_ofq1i")
 first_level = ExtResource("2_offtv")
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = 0
 
 [node name="Control" type="Control" parent="BackgroundLayer"]
 layout_mode = 3
@@ -55,6 +58,30 @@ text = "Start"
 layout_mode = 2
 text = "Quit
 "
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MenuLayer/Menu"]
+layout_mode = 0
+offset_left = 61.0
+offset_top = 95.0
+offset_right = 190.0
+offset_bottom = 139.0
+text = "Connection"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="BodyConnection" parent="CanvasLayer" node_paths=PackedStringArray("body1", "body2") instance=ExtResource("4_ar8iu")]
+points = PackedVector2Array(355, 118, 487, 250)
+width = 0.855301
+default_color = Color(0.911175, 0.0888254, 0, 0.488825)
+body1 = NodePath("../PlayerBody")
+body2 = NodePath("../PlayerBody2")
+
+[node name="PlayerBody" parent="CanvasLayer" instance=ExtResource("5_quse2")]
+position = Vector2(355, 118)
+
+[node name="PlayerBody2" parent="CanvasLayer" instance=ExtResource("5_quse2")]
+position = Vector2(487, 250)
 
 [connection signal="pressed" from="MenuLayer/Menu/MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MenuLayer/Menu/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

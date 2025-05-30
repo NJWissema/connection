@@ -41,7 +41,7 @@ func un_select():
 	unhighlight()
 
 func highlight():
-	body_sprite.set_modulate(Color(1,0.5,0.1,1))
+	body_sprite.set_modulate(Color(0.8,0.5,0.5,1))
 
 func unhighlight():
 	body_sprite.set_modulate(Color(1,1,1,1))

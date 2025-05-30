@@ -10,4 +10,5 @@ point_count = 3
 width = 2.0
 width_curve = SubResource("Curve_q8ch5")
 default_color = Color(1, 0, 0, 1)
+antialiased = true
 script = ExtResource("1_et56d")

@@ -1,3 +1,4 @@
+@tool
 class_name BodyConnection extends Line2D
 
 #signal connection_achieved(Line:BodyConnection, CurrentLength: float, DesiredLength:float)
@@ -17,15 +18,16 @@ var connected: bool = false
 var broken: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	self.add_point(body1.global_position)
-	self.add_point(body2.global_position)
+	if self.get_point_count() == 0:
+		self.add_point(body1.global_position)
+		self.add_point(body2.global_position)
 
 func get_percentage(pos1: Vector2, pos2: Vector2) -> float:
 	var length = pos1.distance_to(pos2)
 	return (length - desired_length) / (max_length - desired_length)
 
 func get_colour(percentage: float) -> Color:
-	return Color(percentage, (1 - percentage), 0, 1-percentage)
+	return Color(percentage, (1 - percentage), 0, 1.4 - percentage)
 
 func _physics_process(_delta):
 	self.set_point_position(0, body1.global_position)
@@ -33,10 +35,12 @@ func _physics_process(_delta):
 	
 	var percentage = get_percentage(body1.global_position, body2.global_position)
 	self.default_color = get_colour(percentage)
-	self.width = (1-percentage) * 5
+	self.width = 0.5 + (1-percentage) * 4
 	
 	if debug_printing:
 		print(self.default_color)
+	if debug_length_display:
+		print(body1.global_position.distance_to(body2.global_position))
 
 	connected = (true if percentage <= 0 else false)
 	if connected:

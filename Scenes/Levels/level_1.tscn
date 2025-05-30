@@ -17,9 +17,54 @@ size = Vector2(640, 20)
 [node name="Level" type="Node2D" node_paths=PackedStringArray("bodies", "lines")]
 script = ExtResource("1_wpw4o")
 level_name = "Level 1"
-bodies = [NodePath("PlayLayer/Map/PlayerBody"), NodePath("PlayLayer/Map/PlayerBody2"), NodePath("PlayLayer/Map/PlayerBody3")]
-lines = [NodePath("PlayLayer/Map/BodyConnection"), NodePath("PlayLayer/Map/BodyConnection2"), NodePath("PlayLayer/Map/BodyConnection3")]
+bodies = [NodePath("PlayLayer/Map/PlayerBody"), NodePath("PlayLayer/Map/PlayerBody2")]
+lines = [NodePath("PlayLayer/Map/BodyConnection")]
 nextLevel = ExtResource("2_6c4g0")
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = 0
+offset = Vector2(320, 180)
+transform = Transform2D(1, 0, 0, 1, 320, 180)
+follow_viewport_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundLayer"]
+texture = ExtResource("4_4nyes")
+
+[node name="LevelTextLabel" type="RichTextLabel" parent="BackgroundLayer"]
+z_index = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -398.0
+offset_top = -196.0
+offset_right = -158.0
+offset_bottom = -173.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+text = "Connect the outputs!"
+fit_content = true
+scroll_active = false
+
+[node name="LevelTextLabel2" type="RichTextLabel" parent="BackgroundLayer"]
+z_index = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -434.0
+offset_top = -30.0
+offset_right = -74.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+text = "Click the outputs to select them"
+fit_content = true
+scroll_active = false
 
 [node name="PlayLayer" type="CanvasLayer" parent="."]
 
@@ -51,59 +96,60 @@ position = Vector2(320, 370)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayLayer/Obstacles/OuterWalls/BottomWall"]
 shape = SubResource("RectangleShape2D_vq5rg")
 
+[node name="StaticBody2D" type="StaticBody2D" parent="PlayLayer/Obstacles"]
+position = Vector2(280, 120)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlayLayer/Obstacles/StaticBody2D"]
+polygon = PackedVector2Array(-280, -5, 280, -5, 280, 5, -280, 5)
+
+[node name="Polygon2D" type="Polygon2D" parent="PlayLayer/Obstacles/StaticBody2D"]
+color = Color(0.501961, 0.501961, 0.501961, 1)
+polygon = PackedVector2Array(-280, -5, 280, -5, 280, 5, -280, 5)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="PlayLayer/Obstacles"]
+position = Vector2(360, 240)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="PlayLayer/Obstacles/StaticBody2D2"]
+polygon = PackedVector2Array(-280, -5, 280, -5, 280, 5, -280, 5)
+
+[node name="Polygon2D" type="Polygon2D" parent="PlayLayer/Obstacles/StaticBody2D2"]
+color = Color(0.501961, 0.501961, 0.501961, 1)
+polygon = PackedVector2Array(-280, -5, 280, -5, 280, 5, -280, 5)
+
 [node name="Map" type="Node2D" parent="PlayLayer"]
 
 [node name="BodyConnection" parent="PlayLayer/Map" node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_wsim3")]
-max_length = 500.0
-desired_length = 60.0
+points = PackedVector2Array(50, 50, 580, 300)
+width = 2.15623
+default_color = Color(0.568754, 0.431246, 0, 0.431246)
+max_length = 1000.0
+desired_length = 40.0
 body1 = NodePath("../PlayerBody")
 body2 = NodePath("../PlayerBody2")
 
-[node name="BodyConnection2" parent="PlayLayer/Map" node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_wsim3")]
-max_length = 600.0
-desired_length = 60.0
-body1 = NodePath("../PlayerBody")
-body2 = NodePath("../PlayerBody3")
-
-[node name="BodyConnection3" parent="PlayLayer/Map" node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_wsim3")]
-desired_length = 60.0
-body1 = NodePath("../PlayerBody2")
-body2 = NodePath("../PlayerBody3")
-
 [node name="PlayerBody" parent="PlayLayer/Map" instance=ExtResource("2_yx4ri")]
-position = Vector2(254, 117)
+position = Vector2(50, 50)
 
 [node name="PlayerBody2" parent="PlayLayer/Map" instance=ExtResource("2_yx4ri")]
-position = Vector2(352, 116)
-
-[node name="PlayerBody3" parent="PlayLayer/Map" instance=ExtResource("2_yx4ri")]
-position = Vector2(307, 187)
-
-[node name="BackgroundLayer" type="CanvasLayer" parent="."]
-layer = 0
-offset = Vector2(320, 180)
-transform = Transform2D(1, 0, 0, 1, 320, 180)
-follow_viewport_enabled = true
-
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundLayer"]
-texture = ExtResource("4_4nyes")
-
-[node name="TileMapLayer" type="TileMapLayer" parent="BackgroundLayer"]
+position = Vector2(580, 300)
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 2
 
 [node name="LevelTextLabel" type="RichTextLabel" parent="UILayer"]
-offset_right = 178.0
-offset_bottom = 36.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 69.0
+offset_bottom = 31.0
+mouse_filter = 2
 text = "Level"
 
 [node name="Pause" type="Button" parent="UILayer"]
-offset_left = 583.0
-offset_top = -3.0
-offset_right = 1039.0
-offset_bottom = 517.0
-scale = Vector2(0.1, 0.1)
+offset_left = 600.0
+offset_top = 2.0
+offset_right = 1056.0
+offset_bottom = 522.0
+scale = Vector2(0.08, 0.08)
 icon = ExtResource("5_l3vrf")
 flat = true
 
@@ -238,7 +284,6 @@ text = "Restart"
 layout_mode = 2
 text = "Quit"
 
-[connection signal="pressed" from="UILayer/Pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="UILayer/PauseMenu/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="UILayer/PauseMenu/MarginContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="UILayer/PauseMenu/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

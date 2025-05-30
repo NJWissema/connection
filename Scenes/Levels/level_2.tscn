@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Levels/level.gd" id="1_n2ri8"]
 [ext_resource type="PackedScene" uid="uid://d0qktevoeanrw" path="res://Scenes/body_connection.tscn" id="2_b5wwa"]
-[ext_resource type="PackedScene" uid="uid://d0pv24wyq1qn4" path="res://Scenes/Levels/level_3.tscn" id="2_syfmr"]
+[ext_resource type="PackedScene" uid="uid://c4oaugvt7g0n1" path="res://Scenes/Levels/level_3.tscn" id="2_syfmr"]
 [ext_resource type="PackedScene" uid="uid://cu3qe1lrfwqn3" path="res://Scenes/player_body.tscn" id="3_8tpj6"]
 [ext_resource type="Texture2D" uid="uid://cshudf0n7c0lm" path="res://assets/background.png" id="4_5e4uc"]
 [ext_resource type="Texture2D" uid="uid://3elk24jykwxb" path="res://assets/grip-lines-solid.svg" id="5_3t5wu"]
@@ -17,9 +17,38 @@ size = Vector2(640, 20)
 [node name="Level" type="Node2D" node_paths=PackedStringArray("bodies", "lines")]
 script = ExtResource("1_n2ri8")
 level_name = "Level 2"
-bodies = [NodePath("PlayLayer/Map/PlayerBody"), NodePath("PlayLayer/Map/PlayerBody2"), NodePath("PlayLayer/Map/PlayerBody3")]
-lines = [NodePath("PlayLayer/Map/BodyConnection"), NodePath("PlayLayer/Map/BodyConnection2"), NodePath("PlayLayer/Map/BodyConnection3")]
+bodies = [NodePath("PlayLayer/Map/PlayerBody"), NodePath("PlayLayer/Map/PlayerBody3")]
+lines = [NodePath("PlayLayer/Map/BodyConnection2")]
 nextLevel = ExtResource("2_syfmr")
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = 0
+offset = Vector2(320, 180)
+transform = Transform2D(1, 0, 0, 1, 320, 180)
+follow_viewport_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundLayer"]
+texture = ExtResource("4_5e4uc")
+
+[node name="LevelTextLabel" type="RichTextLabel" parent="BackgroundLayer"]
+offset_left = -73.0
+offset_top = -13.0
+offset_right = 247.0
+offset_bottom = 10.0
+mouse_filter = 2
+text = "Don't break the cable!"
+fit_content = true
+scroll_active = false
+
+[node name="LevelTextLabel2" type="RichTextLabel" parent="BackgroundLayer"]
+offset_left = -114.0
+offset_top = 148.0
+offset_right = 206.0
+offset_bottom = 171.0
+mouse_filter = 2
+text = "You can select multiple outputs!"
+fit_content = true
+scroll_active = false
 
 [node name="PlayLayer" type="CanvasLayer" parent="."]
 
@@ -51,59 +80,59 @@ position = Vector2(320, 370)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayLayer/Obstacles/OuterWalls/BottomWall"]
 shape = SubResource("RectangleShape2D_vq5rg")
 
+[node name="StaticBody2D" type="StaticBody2D" parent="PlayLayer/Obstacles"]
+position = Vector2(320, 120)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlayLayer/Obstacles/StaticBody2D"]
+polygon = PackedVector2Array(-240, -30, 240, -30, 240, -20, -230, -20, -230, 20, 240, 20, 240, 30, -240, 30)
+
+[node name="Polygon2D" type="Polygon2D" parent="PlayLayer/Obstacles/StaticBody2D"]
+color = Color(0.501961, 0.501961, 0.501961, 1)
+polygon = PackedVector2Array(-240, -30, 240, -30, 240, -20, -230, -20, -230, 20, 240, 20, 240, 30, -240, 30)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="PlayLayer/Obstacles"]
+position = Vector2(320, 240)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlayLayer/Obstacles/StaticBody2D2"]
+polygon = PackedVector2Array(240, -30, -240, -30, -240, -20, 230, -20, 230, 20, -240, 20, -240, 30, 240, 30)
+
+[node name="Polygon2D" type="Polygon2D" parent="PlayLayer/Obstacles/StaticBody2D2"]
+color = Color(0.501961, 0.501961, 0.501961, 1)
+polygon = PackedVector2Array(240, -30, -240, -30, -240, -20, 230, -20, 230, 20, -240, 20, -240, 30, 240, 30)
+
 [node name="Map" type="Node2D" parent="PlayLayer"]
 
-[node name="BodyConnection" parent="PlayLayer/Map" node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_b5wwa")]
-max_length = 500.0
-desired_length = 60.0
-body1 = NodePath("../PlayerBody")
-body2 = NodePath("../PlayerBody2")
-
 [node name="BodyConnection2" parent="PlayLayer/Map" node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_b5wwa")]
-max_length = 600.0
-desired_length = 60.0
+points = PackedVector2Array(320, 120, 320, 240)
+width = 2.5
+default_color = Color(0.5, 0.5, 0, 0.9)
+desired_length = 40.0
 body1 = NodePath("../PlayerBody")
-body2 = NodePath("../PlayerBody3")
-
-[node name="BodyConnection3" parent="PlayLayer/Map" node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_b5wwa")]
-desired_length = 60.0
-body1 = NodePath("../PlayerBody2")
 body2 = NodePath("../PlayerBody3")
 
 [node name="PlayerBody" parent="PlayLayer/Map" instance=ExtResource("3_8tpj6")]
-position = Vector2(247, 186)
-
-[node name="PlayerBody2" parent="PlayLayer/Map" instance=ExtResource("3_8tpj6")]
-position = Vector2(334, 244)
+position = Vector2(320, 120)
 
 [node name="PlayerBody3" parent="PlayLayer/Map" instance=ExtResource("3_8tpj6")]
-position = Vector2(307, 187)
-
-[node name="BackgroundLayer" type="CanvasLayer" parent="."]
-layer = 0
-offset = Vector2(320, 180)
-transform = Transform2D(1, 0, 0, 1, 320, 180)
-follow_viewport_enabled = true
-
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundLayer"]
-texture = ExtResource("4_5e4uc")
-
-[node name="TileMapLayer" type="TileMapLayer" parent="BackgroundLayer"]
+position = Vector2(320, 240)
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 2
 
 [node name="LevelTextLabel" type="RichTextLabel" parent="UILayer"]
-offset_right = 178.0
-offset_bottom = 36.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 69.0
+offset_bottom = 31.0
+mouse_filter = 2
 text = "Level"
 
 [node name="Pause" type="Button" parent="UILayer"]
-offset_left = 583.0
-offset_top = -3.0
-offset_right = 1039.0
-offset_bottom = 517.0
-scale = Vector2(0.1, 0.1)
+offset_left = 600.0
+offset_top = 2.0
+offset_right = 1056.0
+offset_bottom = 522.0
+scale = Vector2(0.08, 0.08)
 icon = ExtResource("5_3t5wu")
 flat = true
 
