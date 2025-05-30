@@ -120,8 +120,8 @@ polygon = PackedVector2Array(-280, -5, 280, -5, 280, 5, -280, 5)
 
 [node name="BodyConnection" parent="PlayLayer/Map" node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_wsim3")]
 points = PackedVector2Array(50, 50, 580, 300)
-width = 2.15623
-default_color = Color(0.568754, 0.431246, 0, 0.431246)
+width = 2.22499
+default_color = Color(0.568754, 0.431246, 0, 0.831246)
 max_length = 1000.0
 desired_length = 40.0
 body1 = NodePath("../PlayerBody")

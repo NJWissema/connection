@@ -18,7 +18,7 @@ var connected: bool = false
 var broken: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if self.get_point_count() == 0:
+	if self.get_point_count() == 0 and body1!= null and body2 != null:
 		self.add_point(body1.global_position)
 		self.add_point(body2.global_position)
 
@@ -29,21 +29,24 @@ func get_percentage(pos1: Vector2, pos2: Vector2) -> float:
 func get_colour(percentage: float) -> Color:
 	return Color(percentage, (1 - percentage), 0, 1.4 - percentage)
 
-func _physics_process(_delta):
-	self.set_point_position(0, body1.global_position)
-	self.set_point_position(1, body2.global_position)
-	
-	var percentage = get_percentage(body1.global_position, body2.global_position)
-	self.default_color = get_colour(percentage)
-	self.width = 0.5 + (1-percentage) * 4
-	
-	if debug_printing:
-		print(self.default_color)
-	if debug_length_display:
-		print(body1.global_position.distance_to(body2.global_position))
+func _process(_delta):
+	if body1!= null and body2 != null:
+		self.set_point_position(0, body1.global_position)
+		self.set_point_position(1, body2.global_position)
 
-	connected = (true if percentage <= 0 else false)
-	if connected:
-		self.default_color = Color.BLUE
-	if breakable:
-		broken = (true if percentage >= 1 else false)
+func _physics_process(_delta):
+	if body1!= null and body2 != null:
+		var percentage = get_percentage(body1.global_position, body2.global_position)
+		self.default_color = get_colour(percentage)
+		self.width = 0.5 + (1-percentage) * 4
+		
+		if debug_printing:
+			print(self.default_color)
+		if debug_length_display:
+			print(body1.global_position.distance_to(body2.global_position))
+
+		connected = (true if percentage <= 0 else false)
+		if connected:
+			self.default_color = Color.BLUE
+		if breakable:
+			broken = (true if percentage >= 1 else false)
