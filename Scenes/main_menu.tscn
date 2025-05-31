@@ -1,14 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkatj6ndrvg1i"]
+[gd_scene load_steps=8 format=3 uid="uid://dkatj6ndrvg1i"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_ofq1i"]
 [ext_resource type="Texture2D" uid="uid://cshudf0n7c0lm" path="res://assets/background.png" id="1_u5w6c"]
 [ext_resource type="PackedScene" uid="uid://u2naw361yemr" path="res://Scenes/Levels/level_1.tscn" id="2_offtv"]
-[ext_resource type="PackedScene" uid="uid://d0qktevoeanrw" path="res://Scenes/body_connection.tscn" id="4_ar8iu"]
-[ext_resource type="PackedScene" uid="uid://cu3qe1lrfwqn3" path="res://Scenes/player_body.tscn" id="5_quse2"]
+[ext_resource type="PackedScene" uid="uid://olic216eju20" path="res://Scenes/Levels/playground.tscn" id="3_njp7x"]
+[ext_resource type="PackedScene" uid="uid://d0qktevoeanrw" path="res://Scenes/Objects/body_connection.tscn" id="4_ar8iu"]
+[ext_resource type="PackedScene" uid="uid://cu3qe1lrfwqn3" path="res://Scenes/Objects/player_body.tscn" id="5_quse2"]
+[ext_resource type="AudioStream" uid="uid://frtfiuyiyo6d" path="res://assets/Sketchbook 2024-01-24_02.ogg" id="7_pniyj"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_ofq1i")
 first_level = ExtResource("2_offtv")
+playground = ExtResource("3_njp7x")
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = 0
@@ -55,7 +58,9 @@ layout_mode = 2
 text = "Start"
 
 [node name="QuitButton" type="Button" parent="MenuLayer/Menu/MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
+disabled = true
 text = "Quit
 "
 
@@ -66,6 +71,31 @@ offset_top = 95.0
 offset_right = 190.0
 offset_bottom = 139.0
 text = "Connection"
+
+[node name="GridContainer" type="GridContainer" parent="MenuLayer/Menu"]
+visible = false
+layout_mode = 0
+offset_left = 335.0
+offset_top = 131.0
+offset_right = 375.0
+offset_bottom = 171.0
+columns = 4
+
+[node name="Button" type="Button" parent="MenuLayer/Menu/GridContainer"]
+layout_mode = 2
+text = "1"
+
+[node name="Button2" type="Button" parent="MenuLayer/Menu/GridContainer"]
+layout_mode = 2
+text = "2"
+
+[node name="Button" type="Button" parent="MenuLayer/Menu"]
+layout_mode = 2
+offset_left = 617.0
+offset_top = 334.0
+offset_right = 649.0
+offset_bottom = 365.0
+text = ":-)"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
@@ -83,5 +113,10 @@ position = Vector2(355, 118)
 [node name="PlayerBody2" parent="CanvasLayer" instance=ExtResource("5_quse2")]
 position = Vector2(487, 250)
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_pniyj")
+autoplay = true
+
 [connection signal="pressed" from="MenuLayer/Menu/MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MenuLayer/Menu/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MenuLayer/Menu/Button" to="." method="_on_button_pressed"]

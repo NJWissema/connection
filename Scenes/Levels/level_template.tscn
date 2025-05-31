@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://d21vl1nnhhc1f"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/level.gd" id="1_dsl11"]
-[ext_resource type="PackedScene" uid="uid://d0qktevoeanrw" path="res://Scenes/body_connection.tscn" id="2_dvj41"]
-[ext_resource type="PackedScene" uid="uid://cu3qe1lrfwqn3" path="res://Scenes/player_body.tscn" id="3_0uwon"]
+[ext_resource type="PackedScene" uid="uid://d0qktevoeanrw" path="res://Scenes/Objects/body_connection.tscn" id="2_dvj41"]
+[ext_resource type="PackedScene" uid="uid://cu3qe1lrfwqn3" path="res://Scenes/Objects/player_body.tscn" id="3_0uwon"]
 [ext_resource type="Texture2D" uid="uid://cshudf0n7c0lm" path="res://assets/background.png" id="4_jlpsg"]
 [ext_resource type="Texture2D" uid="uid://3elk24jykwxb" path="res://assets/grip-lines-solid.svg" id="5_fjvmj"]
 [ext_resource type="Theme" uid="uid://clx3txsce2cib" path="res://assets/the_theme.tres" id="6_jhobq"]
@@ -13,11 +13,9 @@ size = Vector2(20, 400)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vq5rg"]
 size = Vector2(640, 20)
 
-[node name="Level" type="Node2D" node_paths=PackedStringArray("bodies", "lines")]
+[node name="Level" type="Node2D"]
 script = ExtResource("1_dsl11")
 level_name = "Level1"
-bodies = [NodePath("PlayLayer/Map/PlayerBody"), NodePath("PlayLayer/Map/PlayerBody2"), NodePath("PlayLayer/Map/PlayerBody3")]
-lines = [NodePath("PlayLayer/Map/BodyConnection"), NodePath("PlayLayer/Map/BodyConnection2"), NodePath("PlayLayer/Map/BodyConnection3")]
 
 [node name="PlayLayer" type="CanvasLayer" parent="."]
 
@@ -120,7 +118,7 @@ layer = 2
 [node name="LevelTextLabel" type="RichTextLabel" parent="UILayer"]
 offset_left = 5.0
 offset_top = 5.0
-offset_right = 69.0
+offset_right = 319.0
 offset_bottom = 31.0
 mouse_filter = 2
 text = "Level"

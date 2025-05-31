@@ -1,0 +1,255 @@
+[gd_scene load_steps=9 format=3 uid="uid://olic216eju20"]
+
+[ext_resource type="Script" path="res://Scripts/Levels/level.gd" id="1_vaff4"]
+[ext_resource type="PackedScene" uid="uid://d0qktevoeanrw" path="res://Scenes/Objects/body_connection.tscn" id="2_qn67r"]
+[ext_resource type="PackedScene" uid="uid://cu3qe1lrfwqn3" path="res://Scenes/Objects/player_body.tscn" id="3_kunyo"]
+[ext_resource type="Texture2D" uid="uid://cshudf0n7c0lm" path="res://assets/background.png" id="4_7awen"]
+[ext_resource type="Texture2D" uid="uid://3elk24jykwxb" path="res://assets/grip-lines-solid.svg" id="5_grlpt"]
+[ext_resource type="Theme" uid="uid://clx3txsce2cib" path="res://assets/the_theme.tres" id="6_pmt8v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3epbn"]
+size = Vector2(20, 400)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vq5rg"]
+size = Vector2(640, 20)
+
+[node name="Level" type="Node2D" node_paths=PackedStringArray("bodies", "lines")]
+script = ExtResource("1_vaff4")
+level_name = "Playground!"
+bodies = [NodePath("PlayLayer/Map/PlayerBody"), NodePath("PlayLayer/Map/PlayerBody2")]
+lines = [NodePath("PlayLayer/Map/BodyConnection")]
+
+[node name="PlayLayer" type="CanvasLayer" parent="."]
+
+[node name="Obstacles" type="Node2D" parent="PlayLayer"]
+
+[node name="OuterWalls" type="Node2D" parent="PlayLayer/Obstacles"]
+
+[node name="LeftWall" type="StaticBody2D" parent="PlayLayer/Obstacles/OuterWalls"]
+position = Vector2(-10, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayLayer/Obstacles/OuterWalls/LeftWall"]
+shape = SubResource("RectangleShape2D_3epbn")
+
+[node name="RightWall" type="StaticBody2D" parent="PlayLayer/Obstacles/OuterWalls"]
+position = Vector2(650, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayLayer/Obstacles/OuterWalls/RightWall"]
+shape = SubResource("RectangleShape2D_3epbn")
+
+[node name="TopWall" type="StaticBody2D" parent="PlayLayer/Obstacles/OuterWalls"]
+position = Vector2(320, -10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayLayer/Obstacles/OuterWalls/TopWall"]
+shape = SubResource("RectangleShape2D_vq5rg")
+
+[node name="BottomWall" type="StaticBody2D" parent="PlayLayer/Obstacles/OuterWalls"]
+position = Vector2(320, 370)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayLayer/Obstacles/OuterWalls/BottomWall"]
+shape = SubResource("RectangleShape2D_vq5rg")
+
+[node name="Map" type="Node2D" parent="PlayLayer"]
+
+[node name="BodyConnection" parent="PlayLayer/Map" node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_qn67r")]
+points = PackedVector2Array(254, 117, 355, 108)
+width = 4.32383
+default_color = Color(0.0440428, 0.955957, 0, 1.35596)
+max_length = 1000.0
+desired_length = 60.0
+body1 = NodePath("../PlayerBody")
+body2 = NodePath("../PlayerBody2")
+
+[node name="PlayerBody" parent="PlayLayer/Map" instance=ExtResource("3_kunyo")]
+position = Vector2(254, 117)
+
+[node name="PlayerBody2" parent="PlayLayer/Map" instance=ExtResource("3_kunyo")]
+position = Vector2(355, 108)
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = 0
+offset = Vector2(320, 180)
+transform = Transform2D(1, 0, 0, 1, 320, 180)
+follow_viewport_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundLayer"]
+texture = ExtResource("4_7awen")
+
+[node name="LevelTextLabel" type="RichTextLabel" parent="BackgroundLayer"]
+z_index = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -445.0
+offset_top = -23.0
+offset_right = -205.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+text = "Playing and testing mechanics"
+fit_content = true
+scroll_active = false
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="LevelTextLabel" type="RichTextLabel" parent="UILayer"]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 319.0
+offset_bottom = 31.0
+mouse_filter = 2
+text = "Level"
+
+[node name="Pause" type="Button" parent="UILayer"]
+offset_left = 600.0
+offset_top = 2.0
+offset_right = 1056.0
+offset_bottom = 522.0
+scale = Vector2(0.08, 0.08)
+mouse_filter = 2
+icon = ExtResource("5_grlpt")
+flat = true
+
+[node name="PauseMenu" type="Control" parent="UILayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UILayer/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -69.0
+offset_right = 50.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_pmt8v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/PauseMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UILayer/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Paused"
+fit_content = true
+
+[node name="Resume" type="Button" parent="UILayer/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume
+"
+
+[node name="Restart" type="Button" parent="UILayer/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="Quit" type="Button" parent="UILayer/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="LossMenu" type="Control" parent="UILayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UILayer/LossMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -63.0
+offset_right = 50.0
+offset_bottom = 63.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_pmt8v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/LossMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UILayer/LossMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level Lost"
+fit_content = true
+
+[node name="Restart" type="Button" parent="UILayer/LossMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="Quit" type="Button" parent="UILayer/LossMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="WinMenu" type="Control" parent="UILayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UILayer/WinMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -80.5
+offset_right = 50.0
+offset_bottom = 80.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_pmt8v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/WinMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UILayer/WinMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level Won"
+fit_content = true
+
+[node name="NextLevel" type="Button" parent="UILayer/WinMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Next Level
+"
+
+[node name="Restart" type="Button" parent="UILayer/WinMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="Quit" type="Button" parent="UILayer/WinMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="UILayer/Pause" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="UILayer/PauseMenu/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="UILayer/PauseMenu/MarginContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="UILayer/PauseMenu/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="UILayer/LossMenu/MarginContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="UILayer/LossMenu/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="UILayer/WinMenu/MarginContainer/VBoxContainer/NextLevel" to="." method="_on_next_level_pressed"]
+[connection signal="pressed" from="UILayer/WinMenu/MarginContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="UILayer/WinMenu/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

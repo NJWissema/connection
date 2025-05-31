@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Scripts/Levels/level.gd" id="1_vaxt4"]
 [ext_resource type="Texture2D" uid="uid://cshudf0n7c0lm" path="res://assets/background.png" id="2_0o630"]
-[ext_resource type="PackedScene" uid="uid://d0qktevoeanrw" path="res://Scenes/body_connection.tscn" id="3_s4lpd"]
-[ext_resource type="PackedScene" uid="uid://cu3qe1lrfwqn3" path="res://Scenes/player_body.tscn" id="4_m8cn1"]
+[ext_resource type="PackedScene" uid="uid://d0qktevoeanrw" path="res://Scenes/Objects/body_connection.tscn" id="3_s4lpd"]
+[ext_resource type="PackedScene" uid="uid://cu3qe1lrfwqn3" path="res://Scenes/Objects/player_body.tscn" id="4_m8cn1"]
 [ext_resource type="Texture2D" uid="uid://3elk24jykwxb" path="res://assets/grip-lines-solid.svg" id="5_ge8on"]
 [ext_resource type="Theme" uid="uid://clx3txsce2cib" path="res://assets/the_theme.tres" id="6_kmsfr"]
 
@@ -15,7 +15,7 @@ size = Vector2(640, 20)
 
 [node name="Level" type="Node2D" node_paths=PackedStringArray("bodies", "lines")]
 script = ExtResource("1_vaxt4")
-level_name = "Level1"
+level_name = "Thanks"
 bodies = [NodePath("PlayLayer/Map/PlayerBody"), NodePath("PlayLayer/Map/PlayerBody3")]
 lines = [NodePath("PlayLayer/Map/BodyConnection2")]
 

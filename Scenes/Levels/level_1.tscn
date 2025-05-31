@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Scripts/Levels/level.gd" id="1_wpw4o"]
 [ext_resource type="PackedScene" uid="uid://cbeq7eqjqt8d3" path="res://Scenes/Levels/level_2.tscn" id="2_6c4g0"]
-[ext_resource type="PackedScene" uid="uid://d0qktevoeanrw" path="res://Scenes/body_connection.tscn" id="2_wsim3"]
-[ext_resource type="PackedScene" uid="uid://cu3qe1lrfwqn3" path="res://Scenes/player_body.tscn" id="2_yx4ri"]
+[ext_resource type="PackedScene" uid="uid://d0qktevoeanrw" path="res://Scenes/Objects/body_connection.tscn" id="2_wsim3"]
+[ext_resource type="PackedScene" uid="uid://cu3qe1lrfwqn3" path="res://Scenes/Objects/player_body.tscn" id="2_yx4ri"]
 [ext_resource type="Texture2D" uid="uid://cshudf0n7c0lm" path="res://assets/background.png" id="4_4nyes"]
 [ext_resource type="Texture2D" uid="uid://3elk24jykwxb" path="res://assets/grip-lines-solid.svg" id="5_l3vrf"]
 [ext_resource type="Theme" uid="uid://clx3txsce2cib" path="res://assets/the_theme.tres" id="6_efsg8"]
@@ -284,6 +284,7 @@ text = "Restart"
 layout_mode = 2
 text = "Quit"
 
+[connection signal="pressed" from="UILayer/Pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="UILayer/PauseMenu/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="UILayer/PauseMenu/MarginContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="UILayer/PauseMenu/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

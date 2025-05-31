@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://c4oaugvt7g0n1"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/level.gd" id="1_bnk3s"]
-[ext_resource type="PackedScene" uid="uid://d0qktevoeanrw" path="res://Scenes/body_connection.tscn" id="2_64j3g"]
-[ext_resource type="PackedScene" uid="uid://cn0a4hhhtxwng" path="res://Scenes/Levels/level_thanks.tscn" id="2_nesbp"]
-[ext_resource type="PackedScene" uid="uid://cu3qe1lrfwqn3" path="res://Scenes/player_body.tscn" id="3_dd402"]
+[ext_resource type="PackedScene" uid="uid://d0qktevoeanrw" path="res://Scenes/Objects/body_connection.tscn" id="2_64j3g"]
+[ext_resource type="PackedScene" uid="uid://dfdjaig31y8lf" path="res://Scenes/Levels/level_4.tscn" id="2_jjwvy"]
+[ext_resource type="PackedScene" uid="uid://cu3qe1lrfwqn3" path="res://Scenes/Objects/player_body.tscn" id="3_dd402"]
 [ext_resource type="Texture2D" uid="uid://cshudf0n7c0lm" path="res://assets/background.png" id="4_tcenf"]
 [ext_resource type="Texture2D" uid="uid://3elk24jykwxb" path="res://assets/grip-lines-solid.svg" id="5_380xh"]
 [ext_resource type="Theme" uid="uid://clx3txsce2cib" path="res://assets/the_theme.tres" id="6_u440j"]
@@ -19,7 +19,7 @@ script = ExtResource("1_bnk3s")
 level_name = "Level 3"
 bodies = [NodePath("PlayLayer/Map/PlayerBody"), NodePath("PlayLayer/Map/PlayerBody2"), NodePath("PlayLayer/Map/PlayerBody3")]
 lines = [NodePath("PlayLayer/Map/BodyConnection"), NodePath("PlayLayer/Map/BodyConnection2")]
-nextLevel = ExtResource("2_nesbp")
+nextLevel = ExtResource("2_jjwvy")
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = 0
@@ -84,37 +84,38 @@ polygon = PackedVector2Array(-48, 20, -28, -20, 28, -20, 48, 20, 58, 20, 33, -30
 position = Vector2(160, 0)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlayLayer/Obstacles/StaticBody2D2"]
+visible = false
 polygon = PackedVector2Array(-37, 0, -27, 0, -27, 254, 27, 254, 27, 54, 420, 54, 420, 64, 37, 64, 37, 264, -37, 264)
 
 [node name="Polygon2D" type="Polygon2D" parent="PlayLayer/Obstacles/StaticBody2D2"]
 color = Color(0.501961, 0.501961, 0.501961, 1)
-polygon = PackedVector2Array(-37, 0, -27, 0, -27, 254, 27, 254, 27, 54, 420, 54, 420, 64, 37, 64, 37, 264, -37, 264)
+polygon = PackedVector2Array(-33, 0, -23, 0, -23, 254, 23, 254, 23, 46, 420, 46, 420, 54, 33, 54, 33, 264, -33, 264)
 
 [node name="Map" type="Node2D" parent="PlayLayer"]
 
 [node name="BodyConnection" parent="PlayLayer/Map" node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_64j3g")]
-points = PackedVector2Array(90, 30, 160, 30)
-width = 2.5
-default_color = Color(0.5, 0.5, 0, 0.9)
+points = PackedVector2Array(100, 24, 160, 24)
+width = 3.16667
+default_color = Color(0.333333, 0.666667, 0, 1.06667)
 max_length = 100.0
 desired_length = 40.0
 body1 = NodePath("../PlayerBody")
 body2 = NodePath("../PlayerBody2")
 
 [node name="BodyConnection2" parent="PlayLayer/Map" node_paths=PackedStringArray("body1", "body2") instance=ExtResource("2_64j3g")]
-points = PackedVector2Array(90, 30, 142, 340)
-width = 2.15669
-default_color = Color(0.585828, 0.414172, 0, 0.814172)
+points = PackedVector2Array(100, 24, 142, 340)
+width = 2.11221
+default_color = Color(0.596947, 0.403053, 0, 0.803053)
 max_length = 480.0
 desired_length = 80.0
 body1 = NodePath("../PlayerBody")
 body2 = NodePath("../PlayerBody3")
 
 [node name="PlayerBody" parent="PlayLayer/Map" instance=ExtResource("3_dd402")]
-position = Vector2(90, 30)
+position = Vector2(100, 24)
 
 [node name="PlayerBody2" parent="PlayLayer/Map" instance=ExtResource("3_dd402")]
-position = Vector2(160, 30)
+position = Vector2(160, 24)
 
 [node name="PlayerBody3" parent="PlayLayer/Map" instance=ExtResource("3_dd402")]
 position = Vector2(142, 340)

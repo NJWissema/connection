@@ -1,7 +1,6 @@
 class_name Level extends Node2D
 
 
-
 @export var level_name: String = "Level"
 
 @export var bodies : Array[PlayerBody]
@@ -21,7 +20,6 @@ var game_paused: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$UILayer/LevelTextLabel.text = level_name
-
 
 func display_victory():
 	pause_game()
@@ -44,7 +42,6 @@ func unpause_game():
 		play_area.process_mode = PROCESS_MODE_INHERIT
 
 func restart_game():
-	
 	get_tree().reload_current_scene()
 
 func open_pause_menu():
@@ -55,14 +52,14 @@ func close_pause_menu():
 	pause_menu.visible = false
 	unpause_game()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
 
 func _input(_event):
 	if Input.is_action_pressed('escape'):
 		open_pause_menu()
+	if Input.is_action_just_pressed("right_click"):
+		unselect_all()
 
+	
 func _physics_process(_delta):
 	if !won and !lost:
 		var level_won: bool = true
@@ -78,7 +75,10 @@ func _physics_process(_delta):
 		if lost:
 			display_loss()
 		
-	
+
+func unselect_all():
+	for body in bodies:
+		body.un_select()
 
 #Pause game
 func _on_pause_pressed():
