@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dkatj6ndrvg1i"]
+[gd_scene load_steps=7 format=3 uid="uid://dkatj6ndrvg1i"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_ofq1i"]
 [ext_resource type="Texture2D" uid="uid://cshudf0n7c0lm" path="res://assets/background.png" id="1_u5w6c"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://olic216eju20" path="res://Scenes/Levels/playground.tscn" id="3_njp7x"]
 [ext_resource type="PackedScene" uid="uid://d0qktevoeanrw" path="res://Scenes/Objects/body_connection.tscn" id="4_ar8iu"]
 [ext_resource type="PackedScene" uid="uid://cu3qe1lrfwqn3" path="res://Scenes/Objects/player_body.tscn" id="5_quse2"]
-[ext_resource type="AudioStream" uid="uid://frtfiuyiyo6d" path="res://assets/Sketchbook 2024-01-24_02.ogg" id="7_pniyj"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_ofq1i")
@@ -112,10 +111,6 @@ position = Vector2(355, 118)
 
 [node name="PlayerBody2" parent="CanvasLayer" instance=ExtResource("5_quse2")]
 position = Vector2(487, 250)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_pniyj")
-autoplay = true
 
 [connection signal="pressed" from="MenuLayer/Menu/MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MenuLayer/Menu/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
