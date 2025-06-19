@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dfdjaig31y8lf"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/level.gd" id="1_cujoo"]
-[ext_resource type="PackedScene" uid="uid://bv43fnn7nfpn1" path="res://Scenes/Levels/level_5.tscn" id="2_ky4qp"]
+[ext_resource type="PackedScene" uid="uid://cn0a4hhhtxwng" path="res://Scenes/Levels/level_thanks.tscn" id="2_bcvpk"]
 [ext_resource type="Texture2D" uid="uid://cshudf0n7c0lm" path="res://assets/background.png" id="2_pxsdp"]
 [ext_resource type="PackedScene" uid="uid://d0qktevoeanrw" path="res://Scenes/Objects/body_connection.tscn" id="3_wjnmb"]
 [ext_resource type="PackedScene" uid="uid://cu3qe1lrfwqn3" path="res://Scenes/Objects/player_body.tscn" id="4_jx4as"]
@@ -21,7 +21,7 @@ script = ExtResource("1_cujoo")
 level_name = "Level 4"
 bodies = [NodePath("PlayLayer/Map/PlayerBody"), NodePath("PlayLayer/Map/PlayerBody2")]
 lines = [NodePath("PlayLayer/Map/BodyConnection")]
-nextLevel = ExtResource("2_ky4qp")
+nextLevel = ExtResource("2_bcvpk")
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = 0
